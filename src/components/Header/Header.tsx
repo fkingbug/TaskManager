@@ -7,36 +7,40 @@ import AppBar from '@mui/material/AppBar'
 import { Avatar, Box, IconButton, Toolbar, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-const Header: FC = () => {
+const marginFlex = {
+  display: 'flex',
+  alignItems: 'center',
+  marginRight: '30px',
+  color: 'gray',
+  cursor: 'pointer',
+}
+const marginFlexACtive = {
+  display: 'flex',
+  alignItems: 'center',
+  marginRight: '30px',
+  color: 'white',
+  cursor: 'pointer',
+}
+const header = {
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+}
+const addIcon = {
+  width: '30px',
+  height: '30px',
+  bgcolor: 'pink',
+  // color: '#fff',
+}
+const marginIconStyle = {
+  marginRight: '15px',
+}
+interface headerS {
+  handleOpen: any
+}
+const Header: FC<headerS> = ({ handleOpen }) => {
   const [active, setActive] = useState(0)
-  const marginFlex = {
-    display: 'flex',
-    alignItems: 'center',
-    marginRight: '30px',
-    color: 'gray',
-    cursor: 'pointer',
-  }
-  const marginFlexACtive = {
-    display: 'flex',
-    alignItems: 'center',
-    marginRight: '30px',
-    color: 'white',
-    cursor: 'pointer',
-  }
-  const header = {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  }
-  const addIcon = {
-    width: '30px',
-    height: '30px',
-    bgcolor: 'pink',
-    // color: '#fff',
-  }
-  const marginIconStyle = {
-    marginRight: '15px',
-  }
+
   const handleActive = (num: number) => setActive(num)
   return (
     <AppBar sx={header} position='static'>
@@ -55,7 +59,7 @@ const Header: FC = () => {
         </Link>
       </Toolbar>
       <Toolbar>
-        <IconButton sx={marginIconStyle} aria-label='Example'>
+        <IconButton onClick={handleOpen} sx={marginIconStyle} aria-label='Example'>
           <Avatar sx={addIcon} variant='rounded'>
             <AddIcon />
           </Avatar>
