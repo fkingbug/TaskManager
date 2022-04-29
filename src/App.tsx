@@ -1,9 +1,9 @@
 import { Box, CssBaseline } from '@mui/material'
 import React from 'react'
-import Header from './Header/Header'
-import MainBar from './MainBar/MainBar'
-import MyModal from './components/Modal/MyModal'
-import SideBar from './SideBar/SideBar'
+import Header from './components/Header/Header'
+import MainBar from './components/MainBar/MainBar'
+import MyModal from './components/MyModal/MyModal'
+import SideBar from './components/SideBar/SideBar'
 
 const App = () => {
   const style = {

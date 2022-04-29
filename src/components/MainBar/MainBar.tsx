@@ -1,11 +1,9 @@
-import { Box } from '@mui/material'
 import React from 'react'
+import { Box } from '@mui/material'
+import { styleMainBar } from './MainBar.style'
 
 const MainBar = () => {
-  const style = {
-    flex: 1,
-  }
-  return <Box sx={style}>MainBar</Box>
+  return <Box sx={styleMainBar}>MainBar</Box>
 }
 
 export default MainBar

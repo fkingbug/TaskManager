@@ -7,34 +7,6 @@ import AppBar from '@mui/material/AppBar'
 import { Avatar, Box, IconButton, Toolbar, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-const marginFlex = {
-  display: 'flex',
-  alignItems: 'center',
-  marginRight: '30px',
-  color: 'gray',
-  cursor: 'pointer',
-}
-const marginFlexACtive = {
-  display: 'flex',
-  alignItems: 'center',
-  marginRight: '30px',
-  color: 'white',
-  cursor: 'pointer',
-}
-const header = {
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-}
-const addIcon = {
-  width: '30px',
-  height: '30px',
-  bgcolor: 'pink',
-  // color: '#fff',
-}
-const marginIconStyle = {
-  marginRight: '15px',
-}
 interface headerS {
   handleOpen: any
 }
@@ -43,7 +15,7 @@ const Header: FC<headerS> = ({ handleOpen }) => {
 
   const handleActive = (num: number) => setActive(num)
   return (
-    <AppBar sx={header} position='static'>
+    <AppBar sx={headerStyle} position='static'>
       <Toolbar>
         <Link style={{ textDecoration: 'none' }} to='/dashboard'>
           <Box style={active === 0 ? marginFlexACtive : marginFlex} onClick={() => handleActive(0)}>
