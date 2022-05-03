@@ -4,6 +4,6 @@ import { HeaderProps } from '../../features/HeaderProps'
 import React from 'react'
 
 export const headerRoute: HeaderProps[] = [
-  { name: 'Dashboard', icon: <DashboardIcon /> },
-  { name: 'Collections', icon: <AutoAwesomeMotionIcon /> },
+  { name: 'Dashboard', link: '/dashboard', icon: <DashboardIcon /> },
+  { name: 'Collections', link: '/', icon: <AutoAwesomeMotionIcon /> },
 ]

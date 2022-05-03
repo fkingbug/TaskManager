@@ -8,7 +8,7 @@ const SideBar = () => {
   return (
     <List sx={styleSideBar}>
       {sideBarItems.map((e) => (
-        <SideBarItem {...e} />
+        <SideBarItem key={`${e.id}_${e.name}`} {...e} />
       ))}
     </List>
   )

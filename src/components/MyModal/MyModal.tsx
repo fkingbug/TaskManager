@@ -5,6 +5,7 @@ import { InputBase } from '@mui/material'
 import MySelect from '../MySelect/MySelect'
 import { style, styleModalInput } from './MyModal.style'
 import { MyModalProp } from '../../features/MyModalProp'
+import ThirdSelectCustom from '../ThirdSelectCustom/ThirdSelectCustom'
 
 const MyModal: FC<MyModalProp> = ({ open, handleOpen, handleClose }) => {
   return (
@@ -17,8 +18,8 @@ const MyModal: FC<MyModalProp> = ({ open, handleOpen, handleClose }) => {
       >
         <Box sx={style}>
           <InputBase placeholder='Enter name' fullWidth sx={styleModalInput} />
-          <Box>
-            <MySelect />
+          <Box sx={{ display: 'flex' }}>
+            <ThirdSelectCustom />
           </Box>
         </Box>
       </Modal>

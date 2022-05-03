@@ -9,15 +9,15 @@ export const testStyle = {
 export const MenuProps = {
   PaperProps: {
     style: {
-      backgroundColor: '#20212c',
-      border: '1px solid  #2e2e39',
+      backgroundColor: 'white',
+      border: '1px solid  white',
       padding: '5px 10px',
       color: '#77778f',
     },
   },
-  MuiSelect: {
-    style: {
-      backgroundColor: 'red',
-    },
-  },
+  // MenuListProps: {
+  //   style: {
+  //     backgroundColor: 'red',
+  //   },
+  // },
 }

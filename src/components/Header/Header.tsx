@@ -6,6 +6,8 @@ import AddIcon from '@mui/icons-material/Add'
 import AppBar from '@mui/material/AppBar'
 import { Avatar, Box, IconButton, Toolbar, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
+import { addIcon, headerStyle, marginFlex, marginFlexACtive, marginIconStyle } from './Header.style'
+import { headerRoute } from './Header.routes'
 
 interface headerS {
   handleOpen: any
@@ -17,18 +19,14 @@ const Header: FC<headerS> = ({ handleOpen }) => {
   return (
     <AppBar sx={headerStyle} position='static'>
       <Toolbar>
-        <Link style={{ textDecoration: 'none' }} to='/dashboard'>
-          <Box style={active === 0 ? marginFlexACtive : marginFlex} onClick={() => handleActive(0)}>
-            <DashboardIcon />
-            <Typography>Dashboard</Typography>
-          </Box>
-        </Link>
-        <Link style={{ textDecoration: 'none' }} to='/'>
-          <Box style={active === 1 ? marginFlexACtive : marginFlex} onClick={() => handleActive(1)}>
-            <AutoAwesomeMotionIcon />
-            <Typography>Collections</Typography>
-          </Box>
-        </Link>
+        {headerRoute.map((routeItem) => (
+          <Link key={`${routeItem.name}`} style={{ textDecoration: 'none' }} to=''>
+            <Box style={marginFlex}>
+              {routeItem.icon}
+              <Typography>{routeItem.name}</Typography>
+            </Box>
+          </Link>
+        ))}
       </Toolbar>
       <Toolbar>
         <IconButton onClick={handleOpen} sx={marginIconStyle} aria-label='Example'>
