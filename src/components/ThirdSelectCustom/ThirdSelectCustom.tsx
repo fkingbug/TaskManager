@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { FC } from 'react'
 import SelectUnstyled, {
   SelectUnstyledProps,
   selectUnstyledClasses,
@@ -131,8 +131,11 @@ function renderValue(option: SelectOption<any> | null) {
   return <span>{option.label}</span>
 }
 
-export default function ThirdSelectCustom() {
-  const colorOption = '#b3cb74'
+export interface CustomSelectProp {
+  color: string
+}
+const ThirdSelectCustom: FC<CustomSelectProp> = ({ color }) => {
+  const colorOption = color
   return (
     <CustomSelect renderValue={renderValue}>
       {selectIconItems.map((items) => (
@@ -155,3 +158,4 @@ export default function ThirdSelectCustom() {
     </CustomSelect>
   )
 }
+export default ThirdSelectCustom

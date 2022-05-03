@@ -5,7 +5,7 @@ import BookmarksIcon from '@mui/icons-material/Bookmarks'
 import CookieIcon from '@mui/icons-material/Cookie'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore'
-
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn'
 export interface secondSelectProp {
   label: string
   value?: any
@@ -32,8 +32,8 @@ export const selectIconItems: secondSelectProp[] = [
     value: <CookieIcon />,
   },
   {
-    label: 'Code',
-    value: <GitHubIcon />,
+    label: 'Money',
+    value: <MonetizationOnIcon />,
   },
   {
     label: 'Shop',
