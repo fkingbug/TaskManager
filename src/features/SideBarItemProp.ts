@@ -1,6 +1,8 @@
 export interface SideBarItemProp {
+  id?: string
   color: string
   name: string
-  complete: number
-  colorQWE: string
+  icon?: string
+  complete?: number
+  colorQWE?: string
 }

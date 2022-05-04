@@ -1,5 +1,5 @@
 import { Box, CssBaseline } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import Header from './components/Header/Header'
 import MainBar from './components/MainBar/MainBar'
 import MyModal from './components/MyModal/MyModal'
@@ -18,7 +18,7 @@ const App = () => {
     boxShadow: '1px -1px 0px 0px rgb(15 14 52 / 60%)',
   }
 
-  const [open, setOpen] = React.useState(true)
+  const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 

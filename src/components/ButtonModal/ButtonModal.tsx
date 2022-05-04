@@ -2,7 +2,11 @@ import styled from '@emotion/styled'
 import { Button, ButtonProps } from '@mui/material'
 import React from 'react'
 
-const ButtonModal = styled(Button)<ButtonProps>(({ theme }) => ({
+interface myModal extends ButtonProps {
+  coloraaa: string
+}
+
+const ButtonModal = styled(Button)<myModal>(({ theme, coloraaa }) => ({
   color: '#adadb4',
   fontFamily: 'Arimo,sans-serif',
   fontWeight: 400,
@@ -14,7 +18,7 @@ const ButtonModal = styled(Button)<ButtonProps>(({ theme }) => ({
   borderRadius: ' 0.75em',
   padding: '10px 15px',
   '&:hover': {
-    backgroundColor: '#1f1f26',
+    backgroundColor: coloraaa,
     border: '2px solid #212126',
   },
 }))

@@ -1,5 +1,12 @@
 export interface MyModalProp {
   open: boolean
-  handleOpen: any
-  handleClose: any
+  handleOpen: () => void
+  handleClose: () => void
+  value?: TodoProp
+}
+
+export interface TodoProp {
+  name: string
+  icon: string
+  color: string
 }

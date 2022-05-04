@@ -1,111 +1,165 @@
-import React, { useState } from 'react'
-// import { MenuProps, testStyle } from './MySelect.style'
-import { arraySelectIcon } from './MySelect.routes'
-import { Select, SelectChangeEvent, MenuItem } from '@mui/material'
-import { deepPurple } from '@mui/material/colors'
+import React, { FC } from 'react'
+import SelectUnstyled, {
+  SelectUnstyledProps,
+  selectUnstyledClasses,
+  SelectOption,
+} from '@mui/base/SelectUnstyled'
+import OptionUnstyled, { optionUnstyledClasses } from '@mui/base/OptionUnstyled'
+import PopperUnstyled from '@mui/base/PopperUnstyled'
+import { Box, styled } from '@mui/system'
+import { Typography } from '@mui/material'
+import { selectIconItems } from './MySelect.routes'
 
-const MySelect = () => {
-  const [valueSelect, setValueSelect] = useState('')
-  const handleChange = (event: SelectChangeEvent) => {
-    setValueSelect(event.target.value as string)
+const StyledButton = styled('button')(
+  ({ theme }) => `
+  display : flex ;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  min-height: 55px;
+  min-width:140px;
+  background: inherit;
+  border: 2px solid #2e2e39;
+  border-radius: 0.75em;
+  padding: 10px;
+  text-align: left;
+  line-height: 1.5;
+  color: #adadb4;
+  margin: 0;
+  cursor: pointer;
+  
+  &:hover {
+    background: inherit;
+    border: 2px solid #2e2e39;
   }
 
-  const minimalSelectClasses = {
-    select: {
-      minWidth: 200,
-      background: 'white',
-      color: deepPurple[500],
-      fontWeight: 200,
-      borderStyle: 'none',
-      borderWidth: 2,
-      borderRadius: 12,
-      paddingLeft: 24,
-      paddingTop: 14,
-      paddingBottom: 15,
-      boxShadow: '0px 5px 8px -3px rgba(0,0,0,0.14)',
-      '&:focus': {
-        borderRadius: 12,
-        background: 'white',
-        borderColor: deepPurple[100],
-      },
-      '& ul': {
-        paddingTop: '0',
-        paddingBottom: '0',
-        background: 'white',
-        '& li': {
-          fontWeight: '200',
-          paddingTop: '12',
-          paddingBottom: '12',
-        },
-        '& li:hover': {
-          background: deepPurple[100],
-        },
-        '& li.MuiSelected': {
-          color: 'white',
-          background: deepPurple[400],
-        },
-        '& li.MuiSelected:hover': {
-          background: deepPurple[500],
-        },
-      },
-    },
-    icon: {
-      color: deepPurple[300],
-      right: 12,
-      position: 'absolute',
-      userSelect: 'none',
-      pointerEvents: 'none',
-    },
-    paper: {
-      borderRadius: 12,
-      marginTop: 8,
-    },
-    list: {
-      paddingTop: '0',
-      paddingBottom: '0',
-      background: 'white',
-      '& li': {
-        fontWeight: '200',
-        paddingTop: '12',
-        paddingBottom: '12',
-      },
-      '& li:hover': {
-        background: deepPurple[100],
-      },
-      '& li.MuiSelected': {
-        color: 'white',
-        background: deepPurple[400],
-      },
-      '& li.MuiSelected:hover': {
-        background: deepPurple[500],
-      },
-    },
+  &.${selectUnstyledClasses.expanded} {
+    &::after {
+      content: '▴';
+    }
   }
 
-  const menuProps = {
-    classes: {
-      paper: minimalSelectClasses.paper,
-      list: minimalSelectClasses.list,
-    },
+  &::after {
+    content: '▾';
+    float: right;
+  }
+  `
+)
+
+// &.${selectUnstyledClasses.focusVisible} {
+//   outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[100]};
+// }
+
+const StyledListbox = styled('ul')(
+  ({ theme }) => `
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  padding: 5px;
+  margin: 10px 0;
+  min-width: 150px;
+  background-color: #20212c;
+  border: 2px solid #2e2e39;;
+  border-radius: 0.75em;
+  color: #adadb4;
+  overflow: auto;
+  outline: 0px;
+  `
+)
+const StyledOption = styled(OptionUnstyled)(
+  ({ theme }) => `
+  list-style: none;
+  padding: 8px;
+  border-radius: 0.45em;
+  cursor: pointer;
+  &:last-of-type {
+    border-bottom: none;
   }
 
-  return (
-    <>
-      <Select
-        // classes={minimalSelectClasses.select}
-        value={valueSelect}
-        onChange={handleChange}
-        variant='standard'
-      >
-        {arraySelectIcon &&
-          arraySelectIcon.map((itemSelect) => (
-            <MenuItem key={`${itemSelect.value}_${itemSelect.name}`} value={itemSelect.value}>
-              {itemSelect.name}
-            </MenuItem>
-          ))}
-      </Select>
-    </>
-  )
+  &.${optionUnstyledClasses.selected} {
+    background-color: #31314a;
+    color: #adadb4;
+    
+  }
+
+  &.${optionUnstyledClasses.highlighted} {
+    background-color: #31314a;
+    color: #adadb4;
+    
+  }
+
+  &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
+    background-color: #31314a;
+    color: #adadb4;
+    
+  }
+
+  &.${optionUnstyledClasses.disabled} {
+    color: #adadb4;
+    
+  }
+
+  &:hover:not(.${optionUnstyledClasses.disabled}) {
+    background-color: #31314a;
+    color: #adadb4;
+    
+  }
+  `
+)
+
+const StyledPopper = styled(PopperUnstyled)`
+  z-index: 1;
+`
+
+function CustomSelect(props: SelectUnstyledProps<number>) {
+  const components: SelectUnstyledProps<number>['components'] = {
+    Root: StyledButton,
+    Listbox: StyledListbox,
+    //@ts-ignore
+    Popper: StyledPopper,
+    ...props.components,
+  }
+
+  return <SelectUnstyled {...props} components={components} />
 }
 
+function renderValue(option: SelectOption<any> | null) {
+  if (option == null) {
+    return <span>Search</span>
+  }
+
+  return <span>{option.label}</span>
+}
+
+export interface CustomSelectProp {
+  color: string
+  setType: (type: string) => void
+}
+const MySelect: FC<CustomSelectProp> = ({ color, setType }) => {
+  const colorOption = color
+  return (
+    <CustomSelect renderValue={renderValue}>
+      {selectIconItems.map((items) => (
+        <StyledOption key={`${new Date()}_${items.label}`} value={items.label}>
+          <Box
+            onClick={() => setType && setType(items.label)}
+            style={{ display: 'flex', height: 'fit-content' }}
+          >
+            <Box
+              sx={{
+                marginRight: '10px',
+                height: 'fit-content',
+                lineHeight: 0,
+                color: colorOption,
+              }}
+            >
+              {items.value}
+            </Box>
+            <Typography sx={{ height: 'fit-content' }}>{items.label}</Typography>
+          </Box>
+        </StyledOption>
+      ))}
+    </CustomSelect>
+  )
+}
 export default MySelect

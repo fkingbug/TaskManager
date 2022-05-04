@@ -4,7 +4,7 @@ import { ButtonModal, stylePicker, styleSpisok, colorStyle } from './ColorPicker
 import { newArray } from './ColorPicker.routes'
 
 export interface ColorPickerProp {
-  setcolor: any
+  setcolor: (newColor: string) => void
 }
 const ColorPicker: FC<ColorPickerProp> = ({ setcolor }) => {
   const [active, setActive] = useState(false)

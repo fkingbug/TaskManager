@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { List } from '@mui/material'
 import SideBarItem from '../SideBarItem/SideBarItem'
-import { sideBarItems } from './SideBar.routes'
 import { styleSideBar } from './SideBar.style'
+import { TasksProp } from '../../features/TasksProp'
+import { taskAPI } from '../../services/TaskServise'
 
-const SideBar = () => {
+const SideBar: FC<any> = () => {
+  const { data: tasks } = taskAPI.useGetAllTasksQuery('')
   return (
     <List sx={styleSideBar}>
-      {sideBarItems.map((e) => (
-        <SideBarItem key={`${e.id}_${e.name}`} {...e} />
-      ))}
+      {tasks && tasks.map((e: any) => <SideBarItem key={`${e.id}_${e.name}`} {...e} />)}
     </List>
   )
 }

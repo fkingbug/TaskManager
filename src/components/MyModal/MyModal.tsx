@@ -1,23 +1,36 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
-import { Button, InputBase } from '@mui/material'
-import MySelect from '../MySelect/MySelect'
+import { InputBase } from '@mui/material'
 import { style, styleModalInput } from './MyModal.style'
-import { MyModalProp } from '../../features/MyModalProp'
-import ThirdSelectCustom from '../ThirdSelectCustom/ThirdSelectCustom'
+import { MyModalProp, TodoProp } from '../../features/MyModalProp'
+import MySelect from '../MySelect/MySelect'
 import ColorPicker from '../ColorPicker/ColorPicker'
 import ButtonModal from '../ButtonModal/ButtonModal'
+import { Controller, useForm } from 'react-hook-form'
+import { useAppDispatch } from '../../hooks/redux'
+import { taskAPI } from '../../services/TaskServise'
+import { SideBarItemProp } from '../../features/SideBarItemProp'
 
-const MyModal: FC<MyModalProp> = ({ open, handleOpen, handleClose }) => {
-  const [color, setcolor] = useState('#ff3232')
+const MyModal: FC<MyModalProp> = ({ open, handleOpen, handleClose, value }) => {
+  const {
+    watch,
+    control,
+    formState: { isValid },
+    register,
+    handleSubmit,
+  } = useForm<TodoProp>({
+    defaultValues: value || { color: '#ff3232' },
+  })
+  const color = watch('color')
+  const [createPost, {}] = taskAPI.useCreateTasksMutation()
 
-  const btnColor = {
-    '&:hover': {
-      backgroundColor: color,
-      border: '2px solid #212126',
-    },
+  const handleFormSub = async (data: any) => {
+    handleClose()
+    // dispatch(PostTasks(data))
+    await createPost(data as SideBarItemProp)
   }
+
   return (
     <Box>
       <Modal
@@ -26,14 +39,35 @@ const MyModal: FC<MyModalProp> = ({ open, handleOpen, handleClose }) => {
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
-        <Box sx={style}>
-          <InputBase placeholder='Enter name' fullWidth sx={styleModalInput} />
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <ThirdSelectCustom color={color} />
-            <ColorPicker setcolor={setcolor} />
-            <ButtonModal>Create</ButtonModal>
+        <form onSubmit={handleSubmit((data) => handleFormSub(data))}>
+          <Box sx={style}>
+            <InputBase
+              {...register('name')}
+              placeholder='Enter name'
+              fullWidth
+              sx={styleModalInput}
+            />
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Controller
+                name='icon'
+                control={control}
+                render={({ field: { onChange } }) => {
+                  return <MySelect setType={onChange} color={color} />
+                }}
+              />
+
+              <Controller
+                name='color'
+                defaultValue={'#ff3232'}
+                control={control}
+                render={({ field: { onChange } }) => <ColorPicker setcolor={onChange} />}
+              />
+              <ButtonModal coloraaa={color} type='submit' disabled={!isValid}>
+                Create
+              </ButtonModal>
+            </Box>
           </Box>
-        </Box>
+        </form>
       </Modal>
     </Box>
   )
