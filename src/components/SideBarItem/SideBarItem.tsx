@@ -6,7 +6,12 @@ import { SideBarItemProp } from '../../features/SideBarItemProp'
 import { selectIconItems } from '../MySelect/MySelect.routes'
 import { TasksProp } from '../../features/TasksProp'
 
-const SideBarItem: FC<TasksProp> = ({ id, icon, color, name }) => {
+const SideBarItem: FC<TasksProp> = ({
+  id,
+  icon = 'Profole',
+  color = '00aaf7',
+  name = 'Unknown task',
+}) => {
   const complete = '90'
   const colorQWE = '#b274cb'
 
