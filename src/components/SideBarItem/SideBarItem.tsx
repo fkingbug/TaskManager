@@ -1,10 +1,9 @@
 import React, { FC } from 'react'
 import { Avatar, IconButton, ListItem, ListItemText } from '@mui/material'
-import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import { iconAnimation, item } from './SideBarItem.style'
-import { SideBarItemProp } from '../../features/SideBarItemProp'
 import { selectIconItems } from '../MySelect/MySelect.routes'
 import { TasksProp } from '../../features/TasksProp'
+import { taskAPI } from '../../services/TaskServise'
 
 const SideBarItem: FC<TasksProp> = ({
   id,
@@ -15,8 +14,13 @@ const SideBarItem: FC<TasksProp> = ({
   const complete = '90'
   const colorQWE = '#b274cb'
 
+  const [deleteTask, {}] = taskAPI.useDeleteTasksMutation()
+
+  const handleDelete = async () => {
+    await deleteTask(id)
+  }
   return (
-    <ListItem sx={{ cursor: 'pointer' }}>
+    <ListItem onClick={() => handleDelete()} sx={{ cursor: 'pointer' }}>
       <IconButton sx={iconAnimation}>
         <Avatar variant='rounded' sx={{ bgcolor: color }}>
           {selectIconItems.filter((e) => e.label === icon)[0].value}

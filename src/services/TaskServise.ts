@@ -18,5 +18,11 @@ export const taskAPI = createApi({
         body: task,
       }),
     }),
+    deleteTasks: build.mutation({
+      query: (id) => ({
+        url: `/todos/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 })
