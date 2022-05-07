@@ -4,6 +4,7 @@ import { iconAnimation, item } from './SideBarItem.style'
 import { selectIconItems } from '../MySelect/MySelect.routes'
 import { TasksProp } from '../../features/TasksProp'
 import { taskAPI } from '../../services/TaskServise'
+import ClearIcon from '@mui/icons-material/Clear'
 
 const SideBarItem: FC<TasksProp> = ({
   id,
@@ -14,13 +15,14 @@ const SideBarItem: FC<TasksProp> = ({
   const complete = '90'
   const colorQWE = '#b274cb'
 
-  const [deleteTask, {}] = taskAPI.useDeleteTasksMutation()
+  const [deleteTask] = taskAPI.useDeleteTasksMutation()
 
-  const handleDelete = async () => {
-    await deleteTask(id)
+  const handleDelete = (event: React.MouseEvent) => {
+    event.preventDefault()
+    deleteTask(id)
   }
   return (
-    <ListItem onClick={() => handleDelete()} sx={{ cursor: 'pointer' }}>
+    <ListItem sx={{ cursor: 'pointer' }}>
       <IconButton sx={iconAnimation}>
         <Avatar variant='rounded' sx={{ bgcolor: color }}>
           {selectIconItems.filter((e) => e.label === icon)[0].value}
@@ -31,6 +33,9 @@ const SideBarItem: FC<TasksProp> = ({
           secondaryTypographyProps={{ sx: { color: colorQWE, opacity: `0.${complete}` } }}
           secondary={`Complete ${complete}%`}
         />
+        <IconButton onClick={(event) => handleDelete(event)}>
+          <ClearIcon sx={{ color: '#808080' }} />
+        </IconButton>
       </IconButton>
     </ListItem>
   )

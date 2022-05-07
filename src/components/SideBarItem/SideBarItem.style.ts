@@ -2,6 +2,7 @@ export const item = {
   paddingLeft: '15px',
   color: '#dbcfcf',
   boxSizing: 'border-box',
+  textDecoration: 'none',
   // 'MuiListItem-secondaryAction': {
   //   color: 'red',
   // },

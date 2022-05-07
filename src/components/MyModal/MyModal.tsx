@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
 import { InputBase } from '@mui/material'
@@ -8,7 +8,6 @@ import MySelect from '../MySelect/MySelect'
 import ColorPicker from '../ColorPicker/ColorPicker'
 import ButtonModal from '../ButtonModal/ButtonModal'
 import { Controller, useForm } from 'react-hook-form'
-import { useAppDispatch } from '../../hooks/redux'
 import { taskAPI } from '../../services/TaskServise'
 import { SideBarItemProp } from '../../features/SideBarItemProp'
 
@@ -23,12 +22,11 @@ const MyModal: FC<MyModalProp> = ({ open, handleOpen, handleClose, value }) => {
     defaultValues: value || { color: '#ff3232' },
   })
   const color = watch('color')
-  const [createPost, {}] = taskAPI.useCreateTasksMutation()
+  const [createPost] = taskAPI.useCreateTasksMutation()
 
-  const handleFormSub = async (data: any) => {
+  const handleFormSub = (data: any) => {
     handleClose()
-    // dispatch(PostTasks(data))
-    await createPost(data as SideBarItemProp)
+    createPost(data as SideBarItemProp)
   }
 
   return (

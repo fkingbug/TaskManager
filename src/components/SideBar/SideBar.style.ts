@@ -1,7 +1,7 @@
 export const styleSideBar = {
   // background: ' #161e2d',
   background: '#20212c',
-  minWidth: '250px',
+  maxWidth: '300px',
   height: '100%',
   overflowY: 'scroll',
   root: {

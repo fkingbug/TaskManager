@@ -3,13 +3,20 @@ import { List } from '@mui/material'
 import SideBarItem from '../SideBarItem/SideBarItem'
 import { styleSideBar } from './SideBar.style'
 import { TasksProp } from '../../features/TasksProp'
-import { taskAPI } from '../../services/TaskServise'
-
-const SideBar: FC<any> = () => {
-  const { data: tasks } = taskAPI.useGetAllTasksQuery('')
+import { Link } from 'react-router-dom'
+interface taskPropMain {
+  tasks: TasksProp[]
+}
+const SideBar: FC<any> = ({ tasks }) => {
+  console.log(tasks)
   return (
     <List sx={styleSideBar}>
-      {tasks && tasks.map((e: any) => <SideBarItem key={`${e.id}_${e.name}`} {...e} />)}
+      {tasks &&
+        tasks.map((e: TasksProp) => (
+          <Link key={`${e.id}_${e.name}`} to={`/task/${e.id}`} style={{ textDecoration: 'none' }}>
+            <SideBarItem {...e} />
+          </Link>
+        ))}
     </List>
   )
 }

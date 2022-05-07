@@ -1,21 +1,20 @@
-import React, { FC, useState } from 'react'
-import DashboardIcon from '@mui/icons-material/Dashboard'
-import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion'
+import React, { FC } from 'react'
+
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import AddIcon from '@mui/icons-material/Add'
 import AppBar from '@mui/material/AppBar'
 import { Avatar, Box, IconButton, Toolbar, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { addIcon, headerStyle, marginFlex, marginFlexACtive, marginIconStyle } from './Header.style'
+import { addIcon, headerStyle, marginFlex, marginIconStyle } from './Header.style'
 import { headerRoute } from './Header.routes'
 
 interface headerS {
   handleOpen: any
 }
 const Header: FC<headerS> = ({ handleOpen }) => {
-  const [active, setActive] = useState(0)
+  // const [active, setActive] = useState(0)
 
-  const handleActive = (num: number) => setActive(num)
+  // const handleActive = (num: number) => setActive(num)
   return (
     <AppBar sx={headerStyle} position='static'>
       <Toolbar>
@@ -39,7 +38,7 @@ const Header: FC<headerS> = ({ handleOpen }) => {
         </IconButton>
         <Avatar
           alt='Remy Sharp'
-          src='https://cdn.discordapp.com/attachments/808074429447405612/968957322804203541/unknown.png'
+          src='https://i.pinimg.com/736x/c2/5d/d9/c25dd985eb7205a20fa83c49691cbccc.jpg'
         />
       </Toolbar>
     </AppBar>

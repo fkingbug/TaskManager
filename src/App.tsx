@@ -1,9 +1,11 @@
 import { Box, CssBaseline } from '@mui/material'
 import React, { useState } from 'react'
+import { Route, Routes } from 'react-router'
 import Header from './components/Header/Header'
 import MainBar from './components/MainBar/MainBar'
 import MyModal from './components/MyModal/MyModal'
 import SideBar from './components/SideBar/SideBar'
+import { taskAPI } from './services/TaskServise'
 
 const App = () => {
   const style = {
@@ -22,14 +24,17 @@ const App = () => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-
+  const { data: tasks } = taskAPI.useGetAllTasksQuery('')
+  // console.log(tasks)
   return (
     <Box sx={style}>
       <CssBaseline />
       <Header handleOpen={handleOpen} />
       <Box sx={contentStyle}>
-        <SideBar />
-        <MainBar />
+        <SideBar tasks={tasks} />
+        <Routes>
+          <Route path='/task/:id' element={<MainBar tasks={tasks} />} />
+        </Routes>
       </Box>
       <MyModal open={open} handleOpen={handleOpen} handleClose={handleClose} />
     </Box>

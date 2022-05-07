@@ -1,6 +1,5 @@
 import styled from '@emotion/styled'
 import { Button, ButtonProps } from '@mui/material'
-import React from 'react'
 
 interface myModal extends ButtonProps {
   coloraaa: string

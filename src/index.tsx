@@ -11,13 +11,11 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 const store = setupStore()
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ThemeProvider>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ThemeProvider>
+  </Provider>
 )
