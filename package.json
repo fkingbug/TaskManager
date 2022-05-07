@@ -2,6 +2,7 @@
   "name": "material-todo",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://fkingbug.github.io/TaskManager",
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -17,6 +18,7 @@
     "@types/react-dom": "^18.0.0",
     "@types/react-redux": "^7.1.24",
     "axios": "^0.27.2",
+    "gh-pages": "^3.2.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-hook-form": "^7.30.0",
@@ -31,7 +33,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predepliy": "npm run build",
+    "debloy": "gh-pages -b build"
   },
   "eslintConfig": {
     "extends": [
