@@ -22,6 +22,14 @@ export const taskAPI = createApi({
       }),
       invalidatesTags: ['Tasks'],
     }),
+    createTodo: build.mutation<TasksProp, TasksProp>({
+      query: (task) => ({
+        url: `/todos/${task.id}`,
+        method: 'PUT',
+        body: task,
+      }),
+      invalidatesTags: ['Tasks'],
+    }),
     deleteTasks: build.mutation({
       query: (id) => ({
         url: `/todos/${id}`,

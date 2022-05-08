@@ -9,7 +9,7 @@ import ColorPicker from '../ColorPicker/ColorPicker'
 import ButtonModal from '../ButtonModal/ButtonModal'
 import { Controller, useForm } from 'react-hook-form'
 import { taskAPI } from '../../services/TaskServise'
-import { SideBarItemProp } from '../../features/SideBarItemProp'
+import { TasksProp, TodosPropCreate } from '../../features/TasksProp'
 
 const MyModal: FC<MyModalProp> = ({ open, handleOpen, handleClose, value }) => {
   const {
@@ -26,7 +26,8 @@ const MyModal: FC<MyModalProp> = ({ open, handleOpen, handleClose, value }) => {
 
   const handleFormSub = (data: any) => {
     handleClose()
-    createPost(data as SideBarItemProp)
+    const postData = { ...data, todos: [] as TodosPropCreate[] }
+    createPost(postData as TasksProp)
   }
 
   return (

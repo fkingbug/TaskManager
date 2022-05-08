@@ -1,6 +1,6 @@
 import { Box, CssBaseline } from '@mui/material'
 import React, { useState } from 'react'
-import { Route, Routes } from 'react-router'
+import { Route, Routes, Navigate } from 'react-router'
 import Header from './components/Header/Header'
 import MainBar from './components/MainBar/MainBar'
 import MyModal from './components/MyModal/MyModal'
@@ -30,12 +30,14 @@ const App = () => {
     <Box sx={style}>
       <CssBaseline />
       <Header handleOpen={handleOpen} />
-      <Box sx={contentStyle}>
-        <SideBar tasks={tasks} />
-        <Routes>
-          <Route path='/task/:id' element={<MainBar tasks={tasks} />} />
-        </Routes>
-      </Box>
+      {tasks && (
+        <Box sx={contentStyle}>
+          <SideBar tasks={tasks} />
+          <Routes>
+            <Route path='/task/:id' element={<MainBar tasks={tasks} />} />
+          </Routes>
+        </Box>
+      )}
       <MyModal open={open} handleOpen={handleOpen} handleClose={handleClose} />
     </Box>
   )
