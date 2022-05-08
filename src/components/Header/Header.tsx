@@ -28,7 +28,7 @@ const Header: FC<headerS> = ({ handleOpen }) => {
         ))}
       </Toolbar>
       <Toolbar>
-        <IconButton onClick={handleOpen} sx={marginIconStyle} aria-label='Example'>
+        <IconButton onClick={handleOpen} sx={marginIconStyle}>
           <Avatar sx={addIcon} variant='rounded'>
             <AddIcon />
           </Avatar>

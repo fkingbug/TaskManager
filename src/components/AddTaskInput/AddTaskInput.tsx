@@ -26,6 +26,7 @@ const AddTaskInput: FC<InputProp> = ({ color, handleTodoPut, todos }) => {
   const handleAdd = () => {
     if (value !== '') {
       const obj = {
+        idTask : `${new Date()}`,
         todo: value,
         isComplete: false,
       }

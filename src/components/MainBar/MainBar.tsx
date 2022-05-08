@@ -13,6 +13,7 @@ import { TasksProp, TodosPropCreate } from '../../features/TasksProp'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import AddTaskInput from '../AddTaskInput/AddTaskInput'
 import { taskAPI } from '../../services/TaskServise'
+import MainTodoItem from '../MainTodoItem/MainTodoItem'
 interface taskPropMain {
   tasks: TasksProp[]
 }
@@ -20,11 +21,24 @@ interface taskPropMain {
 const MainBar: FC<any> = ({ tasks }) => {
   const { id } = useParams()
   const taskfind = tasks.find((task: TasksProp) => task.id === id)
-
+  console.log(taskfind)
   const [createTodo] = taskAPI.useCreateTodoMutation()
 
   const handleTodoPut = (todos: TasksProp[]) => {
     createTodo({ ...taskfind, todos: todos })
+  }
+  const handleDeleteTodoItem = (idTodoItem: string) => {
+    const newArray = taskfind.todos.filter((e: TodosPropCreate) => e.idTask !== idTodoItem)
+    console.log(newArray)
+    createTodo({ ...taskfind, todos: newArray })
+  }
+  const handleComplete = (idTodoItem: string) => {
+    const newArray = taskfind.todos.map(
+      (e: TodosPropCreate) => console.log(e.isComplete)
+      // e.idTask === idTodoItem ? { ...e, isComplete: !isComplete } : e
+    )
+
+    createTodo({ ...taskfind, todos: newArray })
   }
   return (
     <Box sx={styleMainBar}>
@@ -42,7 +56,13 @@ const MainBar: FC<any> = ({ tasks }) => {
         </Box>
         <AddTaskInput color={taskfind.color} handleTodoPut={handleTodoPut} todos={taskfind.todos} />
         {taskfind.todos &&
-          taskfind.todos.map((e: TodosPropCreate) => <Typography>{e.todo}</Typography>)}
+          taskfind.todos.map((e: TodosPropCreate) => (
+            <MainTodoItem
+              {...e}
+              color={taskfind.color}
+              handleDeleteTodoItem={handleDeleteTodoItem}
+            />
+          ))}
       </Box>
     </Box>
   )

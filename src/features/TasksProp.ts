@@ -6,6 +6,7 @@ export interface TasksProp {
   todos: TodosPropCreate[]
 }
 export interface TodosPropCreate {
+  idTask: string
   isComplete: boolean
   todo: string
 }

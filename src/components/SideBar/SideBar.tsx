@@ -8,7 +8,6 @@ interface taskPropMain {
   tasks: TasksProp[]
 }
 const SideBar: FC<any> = ({ tasks }) => {
-  console.log(tasks)
   return (
     <List sx={styleSideBar}>
       {tasks &&
