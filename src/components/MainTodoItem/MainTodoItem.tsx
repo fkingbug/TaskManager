@@ -7,6 +7,7 @@ export interface TodosItemProp {
   todo: string
   color: string
   handleDeleteTodoItem: any
+  handleComplete: any
 }
 
 const itemStyle = {
@@ -30,6 +31,7 @@ const MainTodoItem: FC<TodosItemProp> = ({
   todo,
   color,
   handleDeleteTodoItem,
+  handleComplete,
 }) => {
   const [check, setCheck] = useState(false)
 
@@ -37,11 +39,13 @@ const MainTodoItem: FC<TodosItemProp> = ({
     setCheck(event.target.checked)
   }
   const handleDeleteTodo = () => handleDeleteTodoItem(idTask)
-
+  const handleCompleteTodo = () => handleComplete(idTask)
   return (
     <Box sx={itemStyle}>
       <FormControlLabel
-        sx={styleLabel}
+        // sx={styleLabel}
+        sx={{ ...styleLabel, textDecoration: check === true ? 'line-through' : 'none' }}
+        onClick={handleCompleteTodo}
         control={
           <Checkbox
             sx={{

@@ -4,6 +4,7 @@ export const styleSideBar = {
   width: '300px',
   height: '100%',
   overflowY: 'scroll',
+  color: 'black',
   root: {
     '&::-webkit-scrollbar': {
       width: '8px',

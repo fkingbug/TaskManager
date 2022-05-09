@@ -33,11 +33,9 @@ const MainBar: FC<any> = ({ tasks }) => {
     createTodo({ ...taskfind, todos: newArray })
   }
   const handleComplete = (idTodoItem: string) => {
-    const newArray = taskfind.todos.map(
-      (e: TodosPropCreate) => console.log(e.isComplete)
-      // e.idTask === idTodoItem ? { ...e, isComplete: !isComplete } : e
+    const newArray = taskfind.todos.map((e: TodosPropCreate) =>
+      e.idTask === idTodoItem ? { ...e, isComplete: !e.isComplete } : e
     )
-
     createTodo({ ...taskfind, todos: newArray })
   }
   return (
@@ -61,6 +59,7 @@ const MainBar: FC<any> = ({ tasks }) => {
               {...e}
               color={taskfind.color}
               handleDeleteTodoItem={handleDeleteTodoItem}
+              handleComplete={handleComplete}
             />
           ))}
       </Box>
