@@ -33,7 +33,7 @@ const MainTodoItem: FC<TodosItemProp> = ({
   handleDeleteTodoItem,
   handleComplete,
 }) => {
-  const [check, setCheck] = useState(false)
+  const [check, setCheck] = useState(isComplete)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheck(event.target.checked)
