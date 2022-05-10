@@ -35,11 +35,13 @@ const App = () => {
       {tasks && (
         <Routes>
           <Route path='/' element={<Collections tasks={tasks} />} />
+          <Route path='/task/:id' element={<MainBar tasks={tasks} />} />
+          <Route path='/dashboard' element={<MainBar tasks={tasks} />} />
         </Routes>
-        // <Box sx={contentStyle}>
-        //   <SideBar tasks={tasks} />
+        //
+        //
         //   <Routes>
-        //     <Route path='/task/:id' element={<MainBar tasks={tasks} />} />
+        //
         //   </Routes>
         // </Box>
       )}

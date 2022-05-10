@@ -26,8 +26,8 @@ const styleCollectionsName = {
   marginBottom: '40px',
 }
 const styleCollectionitems = {
-  flex: '1',
-  background: 'red',
+  // flex: '1',
+  // background: 'red',
 }
 const Collections: FC<any> = ({ tasks }) => {
   return (
@@ -35,7 +35,7 @@ const Collections: FC<any> = ({ tasks }) => {
       <Box>
         <Typography sx={styleCollectionsName}>Collections</Typography>
       </Box>
-      <Grid sx={styleCollectionitems} container spacing={3}>
+      <Grid sx={styleCollectionitems} container spacing={2}>
         {tasks.map((e: any) => (
           <CollectionsItem {...e} />
         ))}

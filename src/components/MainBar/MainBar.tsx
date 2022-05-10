@@ -14,14 +14,24 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import AddTaskInput from '../AddTaskInput/AddTaskInput'
 import { taskAPI } from '../../services/TaskServise'
 import MainTodoItem from '../MainTodoItem/MainTodoItem'
+import SideBar from '../SideBar/SideBar'
+import { Link } from 'react-router-dom'
+
 interface taskPropMain {
   tasks: TasksProp[]
+}
+
+const contentStyle = {
+  flex: 1,
+  display: 'flex',
+  boxShadow: '1px -1px 0px 0px rgb(15 14 52 / 60%)',
+  maxHeight: 'calc(100vh - 64px)',
+  overflowY: 'scroll',
 }
 
 const MainBar: FC<any> = ({ tasks }) => {
   const { id } = useParams()
   const taskfind = tasks.find((task: TasksProp) => task.id === id)
-  console.log(taskfind)
   const [createTodo] = taskAPI.useCreateTodoMutation()
 
   const handleTodoPut = (todos: TasksProp[]) => {
@@ -39,29 +49,38 @@ const MainBar: FC<any> = ({ tasks }) => {
     createTodo({ ...taskfind, todos: newArray })
   }
   return (
-    <Box sx={styleMainBar}>
-      <Box sx={mainContainer}>
-        <Box sx={nameTask}>
-          <Box sx={backAndName}>
+    <Box sx={contentStyle}>
+      <SideBar tasks={tasks} />
+      <Box sx={styleMainBar}>
+        <Box sx={mainContainer}>
+          <Box sx={nameTask}>
+            <Box sx={backAndName}>
+              <Link style={{ textDecoration: 'none' }} to='/'>
+                <IconButton sx={backBtn}>
+                  <ArrowBackIosNewIcon />
+                </IconButton>
+              </Link>
+              <Typography sx={taskname}>{taskfind.name}</Typography>
+            </Box>
             <IconButton sx={backBtn}>
               <ArrowBackIosNewIcon />
             </IconButton>
-            <Typography sx={taskname}>{taskfind.name}</Typography>
           </Box>
-          <IconButton sx={backBtn}>
-            <ArrowBackIosNewIcon />
-          </IconButton>
+          <AddTaskInput
+            color={taskfind.color}
+            handleTodoPut={handleTodoPut}
+            todos={taskfind.todos}
+          />
+          {taskfind.todos &&
+            taskfind.todos.map((e: TodosPropCreate) => (
+              <MainTodoItem
+                {...e}
+                color={taskfind.color}
+                handleDeleteTodoItem={handleDeleteTodoItem}
+                handleComplete={handleComplete}
+              />
+            ))}
         </Box>
-        <AddTaskInput color={taskfind.color} handleTodoPut={handleTodoPut} todos={taskfind.todos} />
-        {taskfind.todos &&
-          taskfind.todos.map((e: TodosPropCreate) => (
-            <MainTodoItem
-              {...e}
-              color={taskfind.color}
-              handleDeleteTodoItem={handleDeleteTodoItem}
-              handleComplete={handleComplete}
-            />
-          ))}
       </Box>
     </Box>
   )

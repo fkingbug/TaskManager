@@ -1,12 +1,11 @@
 import React, { FC } from 'react'
-
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import AddIcon from '@mui/icons-material/Add'
 import AppBar from '@mui/material/AppBar'
 import { Avatar, Box, IconButton, Toolbar, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { addIcon, headerStyle, marginFlex, marginIconStyle } from './Header.style'
-import { headerRoute } from './Header.routes'
+import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion'
 
 interface headerS {
   handleOpen: any
@@ -15,17 +14,16 @@ const Header: FC<headerS> = ({ handleOpen }) => {
   // const [active, setActive] = useState(0)
 
   // const handleActive = (num: number) => setActive(num)
+
   return (
     <AppBar sx={headerStyle} position='static'>
       <Toolbar>
-        {headerRoute.map((routeItem) => (
-          <Link key={`${routeItem.name}`} style={{ textDecoration: 'none' }} to=''>
-            <Box style={marginFlex}>
-              {routeItem.icon}
-              <Typography>{routeItem.name}</Typography>
-            </Box>
-          </Link>
-        ))}
+        <Link style={{ textDecoration: 'none' }} to='/'>
+          <Box style={marginFlex}>
+            <AutoAwesomeMotionIcon />
+            <Typography>Collections</Typography>
+          </Box>
+        </Link>
       </Toolbar>
       <Toolbar>
         <IconButton onClick={handleOpen} sx={marginIconStyle}>
