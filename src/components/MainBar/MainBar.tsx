@@ -39,7 +39,6 @@ const MainBar: FC<any> = ({ tasks }) => {
   }
   const handleDeleteTodoItem = (idTodoItem: string) => {
     const newArray = taskfind.todos.filter((e: TodosPropCreate) => e.idTask !== idTodoItem)
-    console.log(newArray)
     createTodo({ ...taskfind, todos: newArray })
   }
   const handleComplete = (idTodoItem: string) => {

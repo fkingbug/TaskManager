@@ -6,14 +6,14 @@ import { Avatar, Box, IconButton, Toolbar, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { addIcon, headerStyle, marginFlex, marginIconStyle } from './Header.style'
 import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion'
+import { taskSlice } from '../../store/reducers/taskSlice'
+import { useAppDispatch } from '../../hooks/redux'
 
-interface headerS {
-  handleOpen: any
-}
-const Header: FC<headerS> = ({ handleOpen }) => {
-  // const [active, setActive] = useState(0)
+const Header = () => {
+  const { modalSwitch } = taskSlice.actions
+  const dispatch = useAppDispatch()
 
-  // const handleActive = (num: number) => setActive(num)
+  const handleOpen = () => dispatch(modalSwitch(true))
 
   return (
     <AppBar sx={headerStyle} position='static'>

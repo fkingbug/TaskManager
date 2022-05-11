@@ -10,8 +10,10 @@ import ButtonModal from '../ButtonModal/ButtonModal'
 import { Controller, useForm } from 'react-hook-form'
 import { taskAPI } from '../../services/TaskServise'
 import { TasksProp, TodosPropCreate } from '../../features/TasksProp'
+import { taskSlice } from '../../store/reducers/taskSlice'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 
-const MyModal: FC<MyModalProp> = ({ open, handleOpen, handleClose, value }) => {
+const MyModal: FC<MyModalProp> = ({ value }) => {
   const {
     watch,
     control,
@@ -24,20 +26,21 @@ const MyModal: FC<MyModalProp> = ({ open, handleOpen, handleClose, value }) => {
   const color = watch('color')
   const [createPost] = taskAPI.useCreateTasksMutation()
 
+  const { isModal } = useAppSelector((state: any) => state.taskReducer)
+  const { modalSwitch } = taskSlice.actions
+  const dispatch = useAppDispatch()
+
   const handleFormSub = (data: any) => {
-    handleClose()
+    dispatch(modalSwitch(false))
     const postData = { ...data, todos: [] as TodosPropCreate[] }
     createPost(postData as TasksProp)
   }
 
+  const handleClose = () => dispatch(modalSwitch(false))
+
   return (
     <Box>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
-      >
+      <Modal open={isModal} onClose={handleClose}>
         <form onSubmit={handleSubmit((data) => handleFormSub(data))}>
           <Box sx={style}>
             <InputBase

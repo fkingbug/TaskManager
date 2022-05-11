@@ -40,6 +40,7 @@ const MainTodoItem: FC<TodosItemProp> = ({
   }
   const handleDeleteTodo = () => handleDeleteTodoItem(idTask)
   const handleCompleteTodo = () => handleComplete(idTask)
+
   return (
     <Box sx={itemStyle}>
       <FormControlLabel
