@@ -6,8 +6,8 @@ export interface TodosItemProp {
   isComplete: boolean
   todo: string
   color: string
-  handleDeleteTodoItem: any
-  handleComplete: any
+  handleDeleteTodoItem: (idTodoItem: string) => void
+  handleComplete: (idTodoItem: string) => void
 }
 
 const itemStyle = {

@@ -23,6 +23,12 @@ const AddTaskInput: FC<InputProp> = ({ color, handleTodoPut, todos }) => {
     }
     setValue('')
   }
+
+  const keyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.code === 'Enter') {
+      handleAdd()
+    }
+  }
   return (
     <InputBase
       sx={styleInput}
@@ -31,7 +37,7 @@ const AddTaskInput: FC<InputProp> = ({ color, handleTodoPut, todos }) => {
       value={value}
       fullWidth
       onChange={(e) => setValue(e.target.value)}
-      onKeyPress={(e) => e.key === 'Enter' && handleAdd}
+      onKeyPress={keyDownHandler}
       startAdornment={
         <InputAdornment position='start'>
           <IconButton onClick={handleAdd} sx={{ ...btnInput, background: color }}>
