@@ -6,6 +6,7 @@ export const styleMainBar = {
   alignContent: 'center',
   alignItems: 'center',
   paddingTop: '50px',
+  overflowY: 'scroll',
 }
 
 export const backBtn = {
@@ -46,5 +47,4 @@ export const contentStyle = {
   display: 'flex',
   boxShadow: '1px -1px 0px 0px rgb(15 14 52 / 60%)',
   maxHeight: 'calc(100vh - 64px)',
-  overflowY: 'scroll',
 }

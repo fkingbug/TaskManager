@@ -2,11 +2,12 @@ import React, { FC, useState } from 'react'
 import AddIcon from '@mui/icons-material/Add'
 import { IconButton, InputAdornment, InputBase } from '@mui/material'
 import { btnInput, styleInput } from './AddTaskInput.style'
+import { TodosPropCreate } from '../../features/TasksProp'
 
 interface InputProp {
   color: string
-  handleTodoPut: any
-  todos: any
+  handleTodoPut: (todosPut: TodosPropCreate[]) => void
+  todos: TodosPropCreate[]
 }
 
 const AddTaskInput: FC<InputProp> = ({ color, handleTodoPut, todos }) => {
@@ -30,13 +31,10 @@ const AddTaskInput: FC<InputProp> = ({ color, handleTodoPut, todos }) => {
       value={value}
       fullWidth
       onChange={(e) => setValue(e.target.value)}
+      onKeyPress={(e) => e.key === 'Enter' && handleAdd}
       startAdornment={
         <InputAdornment position='start'>
-          <IconButton
-            onKeyPress={(e) => e.key === 'Enter' && handleAdd}
-            onClick={handleAdd}
-            sx={{ ...btnInput, background: color }}
-          >
+          <IconButton onClick={handleAdd} sx={{ ...btnInput, background: color }}>
             <AddIcon />
           </IconButton>
         </InputAdornment>
