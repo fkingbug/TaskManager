@@ -10,3 +10,6 @@ export interface TodosPropCreate {
   isComplete: boolean
   todo: string
 }
+export interface ArrayTaskProp {
+  tasks: TasksProp[]
+}

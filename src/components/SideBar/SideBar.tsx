@@ -7,15 +7,14 @@ import { Link } from 'react-router-dom'
 interface taskPropMain {
   tasks: TasksProp[]
 }
-const SideBar: FC<any> = ({ tasks }) => {
+const SideBar: FC<taskPropMain> = ({ tasks }) => {
   return (
     <List sx={styleSideBar}>
-      {tasks &&
-        tasks.map((e: TasksProp) => (
-          <Link key={`${e.id}_${e.name}`} to={`/task/${e.id}`} style={{ textDecoration: 'none' }}>
-            <SideBarItem {...e} />
-          </Link>
-        ))}
+      {tasks.map((e: TasksProp) => (
+        <Link key={`${e.id}_${e.name}`} to={`/task/${e.id}`} style={{ textDecoration: 'none' }}>
+          <SideBarItem {...e} />
+        </Link>
+      ))}
     </List>
   )
 }

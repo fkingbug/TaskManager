@@ -26,22 +26,23 @@ const styleDone = {
 }
 
 const CollectionsItem: FC<TasksProp> = ({ id, name, icon, color, todos }) => {
-  const done = todos.length
   const completeIsDone = todos.reduce(
     (previousValue, currentValue) =>
       currentValue.isComplete === true ? previousValue + 1 : previousValue,
     0
   )
+  const iconMain = selectIconItems.find((e) => e.label === icon)?.value
+
   return (
     <Grid item md={4}>
       <Link key={`${id}_${name}`} to={`/task/${id}`} style={{ textDecoration: 'none' }}>
         <Box style={styleItem}>
           <Avatar variant='rounded' sx={{ bgcolor: color, color: '#20212c', mb: '15px' }}>
-            {selectIconItems.filter((e) => e.label === icon)[0].value}
+            {iconMain}
           </Avatar>
           <Typography sx={styleName}>{name}</Typography>
           <Typography sx={styleDone}>
-            {completeIsDone} / {done} done
+            {completeIsDone} / {todos.length} done
           </Typography>
         </Box>
       </Link>

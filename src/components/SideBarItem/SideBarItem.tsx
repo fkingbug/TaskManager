@@ -3,8 +3,6 @@ import { Avatar, IconButton, ListItem, ListItemText } from '@mui/material'
 import { iconAnimation, item } from './SideBarItem.style'
 import { selectIconItems } from '../MySelect/MySelect.routes'
 import { TasksProp } from '../../features/TasksProp'
-import { taskAPI } from '../../services/TaskServise'
-import ClearIcon from '@mui/icons-material/Clear'
 
 const SideBarItem: FC<TasksProp> = ({
   id,
@@ -15,23 +13,17 @@ const SideBarItem: FC<TasksProp> = ({
 }) => {
   const colorQWE = '#b274cb'
   const completeIsDone = todos.reduce(
-    (previousValue, currentValue) =>
-      currentValue.isComplete === true ? previousValue + 1 : previousValue,
+    (previousValue, currentValue) => (currentValue.isComplete ? previousValue + 1 : previousValue),
     0
   )
-  const complete = Math.floor((completeIsDone / todos.length) * 100)
+  const complete = completeIsDone ? Math.floor((completeIsDone / todos.length) * 100) : 100
+  const iconMain = selectIconItems.find((e) => e.label === icon)?.value
 
-  const [deleteTask] = taskAPI.useDeleteTasksMutation()
-
-  const handleDelete = (event: React.MouseEvent) => {
-    event.preventDefault()
-    deleteTask(id)
-  }
   return (
     <ListItem sx={{ cursor: 'pointer' }}>
       <IconButton sx={iconAnimation}>
         <Avatar variant='rounded' sx={{ bgcolor: color, color: '#20212c' }}>
-          {selectIconItems.filter((e) => e.label === icon)[0].value}
+          {iconMain}
         </Avatar>
         <ListItemText
           sx={item}
@@ -39,9 +31,6 @@ const SideBarItem: FC<TasksProp> = ({
           secondaryTypographyProps={{ sx: { color: colorQWE } }}
           secondary={`Complete ${complete}%`}
         />
-        <IconButton onClick={(event) => handleDelete(event)}>
-          <ClearIcon sx={{ color: '#808080' }} />
-        </IconButton>
       </IconButton>
     </ListItem>
   )

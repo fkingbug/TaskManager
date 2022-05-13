@@ -14,6 +14,13 @@ export const taskAPI = createApi({
       }),
       providesTags: (result) => ['Tasks'],
     }),
+    getIdTasks: build.query<TasksProp[], string>({
+      query: (id) => ({
+        url: `/todos/${id}`,
+        params: {},
+      }),
+      providesTags: (result) => ['Tasks'],
+    }),
     createTasks: build.mutation<SideBarItemProp, SideBarItemProp>({
       query: (task) => ({
         url: '/todos',
