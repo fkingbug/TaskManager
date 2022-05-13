@@ -1,29 +1,8 @@
 import React, { FC, useState } from 'react'
 import { Box, Checkbox, FormControlLabel, IconButton } from '@mui/material'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
-export interface TodosItemProp {
-  idTask: string
-  isComplete: boolean
-  todo: string
-  color: string
-  handleDeleteTodoItem: (idTodoItem: string) => void
-  handleComplete: (idTodoItem: string) => void
-}
-
-const itemStyle = {
-  width: '100%',
-  padding: '15px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  background: '#20212c',
-  borderRadius: '10px',
-  marginBottom: '15px',
-}
-const styleLabel = {
-  flex: 1,
-  padding: 0,
-}
+import { itemStyle, styleLabel } from './MainTodoItem.style'
+import { TodosItemProp } from '../../features/MainTodoItemProp'
 
 const MainTodoItem: FC<TodosItemProp> = ({
   idTask,
@@ -44,8 +23,7 @@ const MainTodoItem: FC<TodosItemProp> = ({
   return (
     <Box sx={itemStyle}>
       <FormControlLabel
-        // sx={styleLabel}
-        sx={{ ...styleLabel, textDecoration: check === true ? 'line-through' : 'none' }}
+        sx={{ ...styleLabel, textDecoration: check ? 'line-through' : 'none' }}
         onClick={handleCompleteTodo}
         control={
           <Checkbox
