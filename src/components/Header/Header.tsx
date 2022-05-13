@@ -12,7 +12,6 @@ import { useAppDispatch } from '../../hooks/redux'
 const Header = () => {
   const { modalSwitch } = taskSlice.actions
   const dispatch = useAppDispatch()
-
   const handleOpen = () => dispatch(modalSwitch(true))
 
   return (

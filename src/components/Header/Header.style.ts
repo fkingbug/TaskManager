@@ -21,7 +21,7 @@ export const addIcon = {
   width: '30px',
   height: '30px',
   bgcolor: 'pink',
-  // color: '#fff',
+  color: '#20212c',
 }
 export const marginIconStyle = {
   marginRight: '15px',

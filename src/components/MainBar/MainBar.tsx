@@ -5,6 +5,7 @@ import { contentStyle } from './MainBar.style'
 import { TasksProp } from '../../features/TasksProp'
 import SideBar from '../SideBar/SideBar'
 import MainContent from '../MainContent/MainContent'
+import Propgres from '../Propgres/Propgres'
 
 interface qweqwe {
   tasks: TasksProp[]
@@ -17,7 +18,7 @@ const MainBar: FC<qweqwe> = ({ tasks }) => {
   return (
     <Box sx={contentStyle}>
       <SideBar tasks={tasks} />
-      {taskfind ? <MainContent taskfind={taskfind} id={id} /> : <p>загрузка</p>}
+      {taskfind ? <MainContent taskfind={taskfind} id={id} /> : <Propgres />}
     </Box>
   )
 }

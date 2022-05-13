@@ -6,6 +6,7 @@ import DrawerInfo from './components/Drawer/Drawer'
 import Header from './components/Header/Header'
 import MainBar from './components/MainBar/MainBar'
 import MyModal from './components/MyModal/MyModal'
+import Propgres from './components/Propgres/Propgres'
 import { taskAPI } from './services/TaskServise'
 import { style } from './theme/App.style'
 
@@ -22,7 +23,7 @@ const App = () => {
           <Route path='/task/:id' element={<MainBar tasks={tasks} />} />
         </Routes>
       ) : (
-        <Typography>Загрузка</Typography>
+        <Propgres />
       )}
       <MyModal />
       <DrawerInfo />
