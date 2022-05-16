@@ -13,6 +13,7 @@ export const backBtn = {
   borderRadius: '10px',
   backgroundColor: '#20212c',
   color: 'white',
+  marginRight: '15px',
 }
 
 export const mainContainer = {
@@ -35,12 +36,15 @@ export const nameTask = {
 export const backAndName = {
   display: 'flex',
   alignItems: 'center',
+  width: '100%',
+  marginRight: '25px',
 }
 export const taskname = {
   fontWeight: '600',
   fontSize: '22px',
   marginLeft: '30px',
   textTransform: 'capitalize',
+  color: 'white',
 }
 export const contentStyle = {
   flex: 1,

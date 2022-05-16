@@ -7,8 +7,7 @@ import { styleDone, styleItem, styleName } from './CollectionsItem.style'
 
 const CollectionsItem: FC<TasksProp> = ({ id, name, icon, color, todos }) => {
   const completeIsDone = todos.reduce(
-    (previousValue, currentValue) =>
-      currentValue.isComplete === true ? previousValue + 1 : previousValue,
+    (previousValue, currentValue) => (currentValue.isComplete ? previousValue + 1 : previousValue),
     0
   )
   const iconMain = selectIconItems.find((e) => e.label === icon)?.value

@@ -1,20 +1,24 @@
-import { Box, IconButton, Typography } from '@mui/material'
-import React, { FC } from 'react'
+import { Box, IconButton, TextField, Typography } from '@mui/material'
+import React, { FC, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AddTaskInput from '../AddTaskInput/AddTaskInput'
 import { styleMainBar, backBtn, mainContainer, nameTask, backAndName, taskname } from '../MainBar'
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import { TasksProp, TodosPropCreate } from '../../features/TasksProp'
 import { taskAPI } from '../../services/TaskServise'
 import MainTodoItem from '../MainTodoItem/MainTodoItem'
+import CustomMenu from '../CustomMenu/CustomMenu'
+import MainContentInput from '../MainContentInput/MainContentInput'
 
-export interface findProp {
+export interface FindProp {
   taskfind: TasksProp
   id?: string
 }
-const MainContent: FC<findProp> = ({ taskfind, id }) => {
+const MainContent: FC<FindProp> = ({ taskfind, id }) => {
   const [createTodo] = taskAPI.useCreateTodoMutation()
+  const history = useNavigate()
+  const [deleteTask] = taskAPI.useDeleteTasksMutation()
+  const [inputCheck, setInputCheck] = useState(false)
 
   const handleTodoPut = (todosPut: TodosPropCreate[]): void => {
     createTodo({ ...taskfind, todos: todosPut })
@@ -29,12 +33,12 @@ const MainContent: FC<findProp> = ({ taskfind, id }) => {
     )
     createTodo({ ...taskfind, todos: newArray })
   }
-
-  const history = useNavigate()
-  const [deleteTask] = taskAPI.useDeleteTasksMutation()
   const handleDeletemain = () => {
     deleteTask(id)
     history('/')
+  }
+  const handleInputChanges = () => {
+    setInputCheck(true)
   }
 
   return (
@@ -47,11 +51,13 @@ const MainContent: FC<findProp> = ({ taskfind, id }) => {
                 <ArrowBackIosNewIcon />
               </IconButton>
             </Link>
-            <Typography sx={taskname}>{taskfind?.name}</Typography>
+            {!inputCheck ? (
+              <Typography sx={taskname}>{taskfind?.name}</Typography>
+            ) : (
+              <MainContentInput setInputCheck={setInputCheck} name={taskfind?.name} />
+            )}
           </Box>
-          <IconButton onClick={handleDeletemain} sx={backBtn}>
-            <DeleteOutlineIcon />
-          </IconButton>
+          <CustomMenu handleInputChanges={handleInputChanges} />
         </Box>
         <AddTaskInput color={taskfind.color} handleTodoPut={handleTodoPut} todos={taskfind.todos} />
         {taskfind.todos &&
