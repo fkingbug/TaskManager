@@ -8,12 +8,14 @@ import { addIcon, headerStyle, marginFlex, marginIconStyle } from './Header.styl
 import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion'
 import { taskSlice } from '../../store/reducers/taskSlice'
 import { useAppDispatch } from '../../hooks/redux'
+import { gitAPI } from '../../services/GitSerevise'
 
 const Header = () => {
-  const { modalSwitch } = taskSlice.actions
+  const { modalSwitch, drawerSwitch } = taskSlice.actions
   const dispatch = useAppDispatch()
   const handleOpen = () => dispatch(modalSwitch(true))
-
+  const handleOpenDrower = () => dispatch(drawerSwitch(true))
+  const { data } = gitAPI.useGetGitInfoQuery('')
   return (
     <AppBar sx={headerStyle} position='static'>
       <Toolbar>
@@ -33,10 +35,18 @@ const Header = () => {
         <IconButton sx={marginIconStyle} aria-label='Example'>
           <NotificationsNoneIcon sx={{ color: '#fff' }} />
         </IconButton>
-        <Avatar
-          alt='Remy Sharp'
-          src='https://i.pinimg.com/736x/c2/5d/d9/c25dd985eb7205a20fa83c49691cbccc.jpg'
-        />
+        {data?.avatar_url ? (
+          <Avatar
+            sx={{ cursor: 'pointer' }}
+            onClick={handleOpenDrower}
+            alt='taski'
+            src={data.avatar_url}
+          />
+        ) : (
+          <Avatar onClick={handleOpenDrower} alt='taski'>
+            F
+          </Avatar>
+        )}
       </Toolbar>
     </AppBar>
   )

@@ -6,7 +6,7 @@ export const styleMainBar = {
   alignContent: 'center',
   alignItems: 'center',
   paddingTop: '50px',
-  overflowY: 'scroll',
+  overflowY: 'auto',
 }
 
 export const backBtn = {

@@ -41,7 +41,7 @@ const Popper = styled(PopperUnstyled)`
   z-index: 1;
 `
 
-const CustomMenu: FC<any> = ({ handleInputChanges }) => {
+const CustomMenu: FC<any> = ({ handleInputChanges, handleDeletemain }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
   const isOpen = Boolean(anchorEl)
   const buttonRef = React.useRef<HTMLButtonElement>(null)
@@ -58,13 +58,6 @@ const CustomMenu: FC<any> = ({ handleInputChanges }) => {
   const close = () => {
     setAnchorEl(null)
     buttonRef.current!.focus()
-  }
-
-  const createHandleMenuClick = (menuItem: string) => {
-    return () => {
-      console.log(`Clicked on ${menuItem}`)
-      close()
-    }
   }
   const styleicon = {
     borderRadius: '10px',
@@ -94,7 +87,7 @@ const CustomMenu: FC<any> = ({ handleInputChanges }) => {
         componentsProps={{ listbox: { id: 'simple-menu' } }}
       >
         <StyledMenuItem onClick={handleInputChanges}>Изменить</StyledMenuItem>
-        <StyledMenuItem onClick={createHandleMenuClick('English')}>Удалить</StyledMenuItem>
+        <StyledMenuItem onClick={handleDeletemain}>Удалить</StyledMenuItem>
       </MenuUnstyled>
     </div>
   )

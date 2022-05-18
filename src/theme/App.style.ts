@@ -3,7 +3,24 @@ export const style = {
   flexDirection: 'column',
   height: '100vh',
   background: '#17181f',
+  '*::-webkit-scrollbar': {
+    width: '6px',
+    // borderRadius: '8px',
+    background: '#2b2f4a',
+  },
+  '*::-webkit-scrollbar-track': {
+    background: 'gray',
+    boxShadow: ' 0 0 2px rgba(0, 0, 0, 0.2) inset',
+    // borderRadius: '8px',
+    width: '6px',
+  },
+  '*::-webkit-scrollbar-thumb': {
+    background: '#232536',
+    // borderRadius: '8px',
+    border: '3px solid #232536',
+  },
 }
+
 export const contentStyle = {
   flex: 1,
   display: 'flex',

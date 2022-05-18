@@ -13,7 +13,7 @@ const styleProgres = {
 const Propgres = () => {
   return (
     <Box sx={styleProgres}>
-      <CircularProgress sx={{ color: '#d5b2b2' }} />
+      <CircularProgress sx={{ color: '#23253' }} />
     </Box>
   )
 }

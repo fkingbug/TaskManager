@@ -18,7 +18,7 @@ export const taskSlice = createSlice({
       state.isModal = action.payload
     },
     drawerSwitch(state, action: PayloadAction<boolean>) {
-      state.isModal = action.payload
+      state.isDrawer = action.payload
     },
   },
 })

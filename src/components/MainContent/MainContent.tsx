@@ -33,6 +33,9 @@ const MainContent: FC<FindProp> = ({ taskfind, id }) => {
     )
     createTodo({ ...taskfind, todos: newArray })
   }
+  const handleChangeName = (name: string): void => {
+    createTodo({ ...taskfind, name })
+  }
   const handleDeletemain = () => {
     deleteTask(id)
     history('/')
@@ -54,10 +57,14 @@ const MainContent: FC<FindProp> = ({ taskfind, id }) => {
             {!inputCheck ? (
               <Typography sx={taskname}>{taskfind?.name}</Typography>
             ) : (
-              <MainContentInput setInputCheck={setInputCheck} name={taskfind?.name} />
+              <MainContentInput
+                handleChangeName={handleChangeName}
+                setInputCheck={setInputCheck}
+                name={taskfind?.name}
+              />
             )}
           </Box>
-          <CustomMenu handleInputChanges={handleInputChanges} />
+          <CustomMenu handleDeletemain={handleDeletemain} handleInputChanges={handleInputChanges} />
         </Box>
         <AddTaskInput color={taskfind.color} handleTodoPut={handleTodoPut} todos={taskfind.todos} />
         {taskfind.todos &&

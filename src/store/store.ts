@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { gitAPI } from '../services/GitSerevise'
 import { taskAPI } from '../services/TaskServise'
 import taskReducer from './reducers/taskSlice'
 
 const rootReducer = combineReducers({
   taskReducer,
   [taskAPI.reducerPath]: taskAPI.reducer,
+  [gitAPI.reducerPath]: gitAPI.reducer,
 })
 
 export const setupStore = () => {
